@@ -1,0 +1,29 @@
+{
+  "data":
+  {
+    "type": "trades",
+    "trades": [
+      {
+        "tradeId" : "T1",
+        "version" : 1,
+        "counterPartyId" : "CP-1",
+        "bookId" : "B2",
+        "maturityDate" : "20/05/2020"
+      },
+      {
+        "tradeId" : "T2",
+        "version" : 2,
+        "counterPartyId" : "CP-2",
+        "bookId" : "B1",
+        "maturityDate" : "01/12/2020"
+      },
+      {
+        "tradeId" : "T3",
+        "version" : 2,
+        "counterPartyId" : "CP-3",
+        "bookId" : "B2",
+        "maturityDate" : "20/05/2020"
+      }
+    ]
+  }
+}
