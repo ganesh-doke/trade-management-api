@@ -1,0 +1,50 @@
+stages:
+  - build
+  - test
+
+build-job:
+  stage: build
+  allow_failure: false
+  script:
+    - chmod +x ./gradlew
+    - $CI_PROJECT_DIR/gradlew --daemon --build-cache --console=auto clean build
+  artifacts:
+    when: always
+    paths:
+      - build/**
+    expire_in: 2 weeks
+
+unit-test-job:
+  stage: test
+  allow_failure: false
+  script:
+    - chmod +x ./gradlew
+    - $CI_PROJECT_DIR/gradlew --build-cache check
+    - awk -F, "{ lines += $6 + $7; covered += $7} END { print covered, "/", lines, " lines covered"; print "Total code coverage:", 100*covered/lines "%"}' build/reports/jacoco/test/jacocoTestReport.csv
+  coverage: '/Total code coverage: \d+(?.\.d+)?%'
+  artifacts:
+    when: always
+    paths:
+      - build/**
+      - gradle/**
+    reports:
+      junit:
+        - build/test-results/test/**/TEST-*.xml
+      coverage_report:
+        coverage_format: cobertura
+        path: build/cobertura-unit.xml
+    expire_in: 2 weeks
+
+mutation-test-job:
+  stage: test
+  allow_failure: false
+  script:
+    - chmod +x ./gradlew
+    - $CI_PROJECT_DIR/gradlew pitest
+  coverage: '/Test strength: \d+(?.\.d+)?%'
+  artifacts:
+    when: always
+    paths:
+      - build/reports/**
+      - gradle/common/**
+    expire_in: 2 weeks
