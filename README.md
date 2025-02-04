@@ -5,7 +5,7 @@ This is trade-management Java spring-boot project using Mongo DB as back end non
 ## Directory Structure
 
 ApiName
-  |---- src
+    |---- src
           |---- main
           |        |---- java
           |        |        |---- com.example.api.trade
@@ -22,4 +22,6 @@ ApiName
           |---- test
           |        |---- java
           |        |---- resources
-          
+
+## Prerequisites 
+* Java 8
