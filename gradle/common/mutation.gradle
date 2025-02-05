@@ -1,0 +1,17 @@
+apply plugin: "info.solidsoft.pitest"
+
+pitest {
+    junit5PluginVersion = '1.0.0'
+    mutationThreshold = 70
+    targetClasses =['com.example.api.trade.**']
+    avoidCallsTo = ['java.util.logging', 'org.apache.log4j', 'org.apache.commons.logging', 'org.slf4j.Logger']
+    excludedClasses = ['com.example.api.trade.config.*',
+                       'com.example.api.trade.model.*',
+                       'com.example.api.trade.error.ErrorCodes',
+                       'com.example.api.trade.constants.*',
+                       'com.example.api.Application']
+    reportDir = new File("${buildDir}/reports/pit")
+    threads = 4
+    outputFormats = ['HTML']
+    verbose = false
+}

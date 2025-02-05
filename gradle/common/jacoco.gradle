@@ -1,0 +1,49 @@
+test {
+    useJUnitPlatform()
+
+    jacoco {
+        enabled = true
+    }
+    finalizedBy jacocoTestReport
+}
+
+check.dependsOn jacocoTestCoverageVerification
+
+
+jacocoTestReport {
+    group 'documentation'
+    reports {
+        xml.enabled true
+        csv.enabled false
+        html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
+    }
+    afterEvaluate {
+        getClassDirectories().setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it,
+                    exclude: ['**/com/example/api/**/config/**',
+                              '**/com/example/api/**/constants/**',
+                              '**/com/example/api/**/model/**',
+                              '**/com/example/api/Application*'
+                    ])
+        }))
+    }
+    finalizedBy jacocoTestCoverageVerification
+}
+
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            element = 'CLASS'
+            limit {
+                counter = 'LINE'
+                value = 'COVEREDRATIO'
+                minimum = 0.5
+            }
+            excludes = ['com.example.api.**.config.**',
+                        'com.example.api.**.constants.**',
+                        'com.example.api.**.model.**',
+                        'com.example.api.Application*'
+            ]
+        }
+    }
+}
