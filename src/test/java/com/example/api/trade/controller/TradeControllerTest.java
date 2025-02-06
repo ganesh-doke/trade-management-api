@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @ExtendWith(MockitoExtension.class)
-public class TradeControllerTest {
+class TradeControllerTest {
 
     TradeController tradeController;
     @InjectMocks TradeServiceImpl tradeService;

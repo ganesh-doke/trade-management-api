@@ -19,7 +19,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(SpringExtension.class)
-public class MongoRepositoryTest {
+class MongoRepositoryTest {
 
     @Mock private MappingMongoConverter mappingMongoConverter;
     @InjectMocks private TestMongoRepository repository;

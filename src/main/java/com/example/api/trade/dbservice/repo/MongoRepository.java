@@ -4,6 +4,7 @@ import com.example.api.trade.config.MongoDbConfig;
 import com.mongodb.*;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoDatabase;
+import lombok.Getter;
 import org.bson.codecs.configuration.CodecRegistries;
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
@@ -20,6 +21,8 @@ public abstract class MongoRepository {
     @Autowired protected MongoClient mongoClient;
     @Autowired private MongoDbConfig mongoDbConfig;
     @Autowired private MappingMongoConverter mappingMongoConverter;
+
+    @Getter
     private MongoDatabase mongoDatabase;
 
     private @PostConstruct void init() {
@@ -39,10 +42,6 @@ public abstract class MongoRepository {
                 .withWriteConcern(WriteConcern.ACKNOWLEDGED);
     }
 
-    public MongoDatabase getMongoDatabase() {
-        return mongoDatabase;
-    }
-
     public BasicDBObject getBasicDBObject(Object object) {
 
         BasicDBObject basicDBObject = new BasicDBObject();
@@ -55,10 +54,9 @@ public abstract class MongoRepository {
         if (CollectionUtils.isEmpty(list)) return null;
 
         List<BasicDBObject> basicDBObjects = new ArrayList<>();
-        BasicDBObject basicDBObject = null;
 
         for (Object object : list) {
-            basicDBObject = new BasicDBObject();
+            BasicDBObject basicDBObject = new BasicDBObject();
             mappingMongoConverter.write(object, basicDBObject);
             basicDBObjects.add(basicDBObject);
         }

@@ -17,7 +17,7 @@ public class TradeRepository extends MongoRepository {
 
     private MongoCollection<Trade> tradeCollection;
 
-    @PostConstruct void init() {
+    @PostConstruct void setUp() {
 
         tradeCollection = getMongoDatabase().getCollection(
                 MongoConstant.TRADE, Trade.class);
