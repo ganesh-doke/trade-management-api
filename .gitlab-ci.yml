@@ -2,7 +2,7 @@ stages:
   - build
   - test
 
-build-job:
+build:
   stage: build
   allow_failure: false
   script:
@@ -14,7 +14,8 @@ build-job:
       - build/**
     expire_in: 2 weeks
 
-unit-test-job:
+unit-test:
+  needs: ["build"]
   stage: test
   allow_failure: false
   script:
@@ -30,12 +31,10 @@ unit-test-job:
     reports:
       junit:
         - build/test-results/test/**/TEST-*.xml
-      coverage_report:
-        coverage_format: cobertura
-        path: build/cobertura-unit.xml
     expire_in: 2 weeks
 
-mutation-test-job:
+mutation-test:
+  needs: ["unit-test"]
   stage: test
   allow_failure: false
   script:
