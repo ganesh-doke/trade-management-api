@@ -19,8 +19,8 @@ plugins {
 	id 'jacoco'
 }
 
-apply from: "${rootDir}/gradle/common/jacoco.gradle"
-apply from: "${rootDir}/gradle/common/mutation.gradle"
+//apply from: "${rootDir}/gradle/common/jacoco.gradle"
+//apply from: "${rootDir}/gradle/common/mutation.gradle"
 
 group = 'com.example.api'
 version = '1.0.0'
