@@ -1,58 +1,63 @@
 {
-    "taskDefinitionArn": "arn:aws:ecs:ap-south-1:431515038864:task-definition/api-family:1",
-    "containerDefinitions": [
+  "taskDefinitionArn": "arn:aws:ecs:ap-south-1:431515038864:task-definition/api-family:3",
+  "containerDefinitions": [
+    {
+      "name": "api-container",
+      "image": "431515038864.dkr.ecr.ap-south-1.amazonaws.com/trade-management:latest",
+      "cpu": 0,
+      "portMappings": [
         {
-            "name": "api-container",
-            "image": "public.ecr.aws/docker/library/httpd:latest",
-            "cpu": 0,
-            "portMappings": [
-                {
-                    "containerPort": 80,
-                    "hostPort": 80,
-                    "protocol": "tcp"
-                }
-            ],
-            "essential": true,
-            "entryPoint": [
-                "sh",
-                "-c"
-            ],
-            "command": [
-                "echo 'Hello, World!' && httpd-foreground"
-            ],
-            "environment": [],
-            "mountPoints": [],
-            "volumesFrom": [],
-            "systemControls": []
+          "containerPort": 80,
+          "hostPort": 80,
+          "protocol": "tcp"
         }
-    ],
-    "family": "api-family", 
-    "executionRoleArn": "arn:aws:iam::431515038864:role/ecsTaskExecutionRole",
-
-    "networkMode": "awsvpc",
-    "revision": 1,
-    "volumes": [],
-    "status": "ACTIVE",
-    "requiresAttributes": [
-        {
-            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
-        },
-        {
-            "name": "ecs.capability.task-eni"
-        }
-    ],
-    "placementConstraints": [],
-    "compatibilities": [
-        "EC2",
-        "FARGATE",
-        "MANAGED_INSTANCES"
-    ],
-    "requiresCompatibilities": [
-        "FARGATE"
-    ],
-    "cpu": "1024",
-    "memory": "3072",
-    "registeredAt": "2026-03-02T11:30:31.767Z",
-    "registeredBy": "arn:aws:iam::431515038864:root",
-    "tags": []
+      ],
+      "essential": true,
+      "entryPoint": [
+        "sh",
+        "-c"
+      ],
+      "command": [
+        "echo 'Hello, World!' && httpd-foreground"
+      ],
+      "environment": [],
+      "mountPoints": [],
+      "volumesFrom": [],
+      "systemControls": []
+    }
+  ],
+  "family": "api-family",
+  "executionRoleArn": "arn:aws:iam::431515038864:role/ecsTaskExecutionRole",
+  "networkMode": "awsvpc",
+  "revision": 3,
+  "volumes": [],
+  "status": "ACTIVE",
+  "requiresAttributes": [
+    {
+      "name": "com.amazonaws.ecs.capability.ecr-auth"
+    },
+    {
+      "name": "ecs.capability.execution-role-ecr-pull"
+    },
+    {
+      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
+    },
+    {
+      "name": "ecs.capability.task-eni"
+    }
+  ],
+  "placementConstraints": [],
+  "compatibilities": [
+    "EC2",
+    "MANAGED_INSTANCES",
+    "FARGATE"
+  ],
+  "requiresCompatibilities": [
+    "FARGATE"
+  ],
+  "cpu": "1024",
+  "memory": "3072",
+  "registeredAt": "2026-03-03T10:25:01.895Z",
+  "registeredBy": "arn:aws:iam::431515038864:user/api-access-user",
+  "tags": []
 }
