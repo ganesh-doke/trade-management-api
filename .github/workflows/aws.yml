@@ -20,6 +20,9 @@ jobs:
           rm -rf .gradle/
           ls -la gradle/common/
 
+      - name: Set execute permission for Gradle wrapper
+        run: chmod +x ./gradlew
+
       - name: Build with Gradle
         run: ./gradlew clean build
 
