@@ -14,8 +14,7 @@
       ],
       "essential": true,
       "entryPoint": [
-        "sh",
-        "-c"
+        "java", "-jar", "app.jar"
       ],
       "environment": [],
       "mountPoints": [],
