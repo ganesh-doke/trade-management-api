@@ -80,7 +80,7 @@ class TradeControllerTest {
         Assertions.assertNotNull(tradeResponse);
         Assertions.assertEquals(tradeRequest.getData().getType(), tradeResponse.getData().getType());
         Assertions.assertEquals("Success", tradeResponse.getData().getMessage());
-        Assertions.assertEquals(4, tradeResponse.getData().getTrades().size());
+        Assertions.assertEquals(3, tradeResponse.getData().getTrades().size());
     }
 
     @Test

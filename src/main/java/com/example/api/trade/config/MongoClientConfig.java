@@ -7,6 +7,7 @@ import com.mongodb.WriteConcern;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -17,6 +18,7 @@ import java.util.concurrent.TimeUnit;
 
 @Slf4j
 @Configuration
+@ConditionalOnProperty(name = "db.instance.name", havingValue = "mongodb")
 public class MongoClientConfig {
 
     private static final String SEMICOLON = ";";
@@ -31,6 +33,11 @@ public class MongoClientConfig {
     @Bean (
             name = {"mongoClient"}, destroyMethod = "close"
     )
+
+    /**
+     * Configure and create a MongoClient bean using the provided MongoDbConfig properties.
+     * @return Configured MongoClient instance.
+     */
     public MongoClient mongoClient() {
 
         log.info("mongoClient configuration to start");

@@ -5,6 +5,7 @@ import com.example.api.trade.model.Trade;
 import com.mongodb.BasicDBObject;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.CollectionUtils;
 
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
+@ConditionalOnProperty(name = "db.instance.name", havingValue = "mongodb")
 public class TradeRepository extends MongoRepository {
 
     private MongoCollection<Trade> tradeCollection;
@@ -23,6 +25,10 @@ public class TradeRepository extends MongoRepository {
                 MongoConstant.TRADE, Trade.class);
     }
 
+    /**
+     * Update the list of trades in DB.
+     * @param trades List of trades to be updated in DB.
+     */
     public void update(List<Trade> trades) {
 
         if (CollectionUtils.isEmpty(trades)) {
@@ -36,6 +42,10 @@ public class TradeRepository extends MongoRepository {
         }
     }
 
+    /**
+     * Create the list of trades in DB.
+     * @param trades List of trades to be created in DB.
+     */
     public void create(List<Trade> trades) {
 
         if (CollectionUtils.isEmpty(trades)) {
@@ -45,6 +55,11 @@ public class TradeRepository extends MongoRepository {
         tradeCollection.insertMany(trades);
     }
 
+    /**
+     * Find the list of trades in DB based on the list of tradeIds.
+     * @param tradeIds List of tradeIds to find the trades in DB.
+     * @return List of trades in DB based on the list of tradeIds.
+     */
     public List<Trade> find(List<String> tradeIds) {
 
         return tradeCollection
