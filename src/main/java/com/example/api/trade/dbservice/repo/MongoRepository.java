@@ -42,6 +42,11 @@ public abstract class MongoRepository {
                 .withWriteConcern(WriteConcern.ACKNOWLEDGED);
     }
 
+    /**
+     * Convert the object to BasicDBObject using MappingMongoConverter.
+     * @param object Object to be converted to BasicDBObject.
+     * @return BasicDBObject converted from the object.
+     */
     public BasicDBObject getBasicDBObject(Object object) {
 
         BasicDBObject basicDBObject = new BasicDBObject();
@@ -49,6 +54,11 @@ public abstract class MongoRepository {
         return basicDBObject;
     }
 
+    /**
+     * Convert the list of objects to list of BasicDBObject using MappingMongoConverter.
+     * @param list List of objects to be converted to list of BasicDBObject.
+     * @return List of BasicDBObject converted from the list of objects.
+     */
     public List<BasicDBObject> getBasicDbObjectList(List<?> list) {
 
         if (CollectionUtils.isEmpty(list)) return null;

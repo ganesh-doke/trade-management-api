@@ -10,18 +10,18 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public enum ErrorCodes {
 
-    GENERAL_ERROR("Something's gone wrong. Techncial error."),
+    GENERAL_ERROR("Something's gone wrong. Technical error."),
     LOWER_VERSION_TRADE("Trade with higher version is already processed."),
     EXPIRED_TRADE("Trade is expired.");
 
     private final String message;
 
     public void buildException(Exception ex) {
-        log.error("{} {}", this.name(), ex);
+        log.error("{}", this.name(), ex);
     }
 
     public void buildException(Trade trade) {
-        log.error("{} {} {}", this.name(), trade.toString(), new Exception(this.message));
+        log.error("{} {}", this.name(), trade.toString(), new Exception(this.message));
     }
 
     public void buildWarning(Trade trade) {
