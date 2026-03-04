@@ -23,6 +23,14 @@
       "environment": [],
       "mountPoints": [],
       "volumesFrom": [],
+      "logConfiguration": {
+         "logDriver": "awslogs",
+            "options": {
+               "awslogs-group": "/ecs/trade-management/app-logs",
+               "awslogs-region": "ap-south-1",
+               "awslogs-stream-prefix": "api"
+            }
+      },
       "systemControls": []
     }
   ],
